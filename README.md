@@ -1,2 +1,2 @@
 # About
-This page explain about Dragonfly Key Exchange and implement it.
+This page explain about Dragonfly Key Exchange in Japanese and implement it.
