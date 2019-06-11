@@ -5,8 +5,8 @@ This repository translate Dragonfly Key Exchange into Japanese and implement it 
 
 ## Construction
 
-Home
-|- translation
-|  |- translation.txt
-|  |- present.txt
-|- implement
+Home  
+|- translation  
+|  |- translation.txt  
+|  |- present.txt  
+|- implement  
