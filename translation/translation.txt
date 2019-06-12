@@ -1,1 +1,20 @@
-UTF-8で書いています
+written by UTF-8
+
+RFC 7664 https://tools.ietf.org/html/rfc7664
+
+-----------------------------------
+Internet Reserch Task Force (IRTF)        D.Harkins, Ed.
+論調の運用((申込?)): 7664                  Aruba Networks
+カテゴリー: 情報提供                        November 2015
+ISSN: 2070-1721
+
+             Dragonfly Key Exchange
+
+概要
+    この文章はパスワードとパスフレーズを使った真正性を証明する離散対数暗号作成法を用いた鍵交換を記す．
+    それは能動的な攻撃，受動的な攻撃，そしてオフラインの辞書攻撃に耐性がある．この文章はCrypto Forum Reserch Group (CFRG) によって保護されている．
+
+このメモの像((写し?))
+    この文章はインターネット標準の手段の仕様書ではない．それは情報提供を発行する．
+
+    このドキュメントはInternet Reserch Task Force (IRTF) によって保護されている．IRTFは研究と開発活動のインターネットのつながりの結果を出版する．
