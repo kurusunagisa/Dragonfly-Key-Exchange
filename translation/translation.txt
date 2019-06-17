@@ -1,20 +1,55 @@
-written by UTF-8
+encoded by UTF-8
 
 RFC 7664 https://tools.ietf.org/html/rfc7664
 
 -----------------------------------
 Internet Reserch Task Force (IRTF)        D.Harkins, Ed.
-論調の運用((申込?)): 7664                  Aruba Networks
+論調の運用: 7664                  Aruba Networks
 カテゴリー: 情報提供                        November 2015
 ISSN: 2070-1721
 
              Dragonfly Key Exchange
 
-概要
+要旨
     この文章はパスワードとパスフレーズを使った真正性を証明する離散対数暗号作成法を用いた鍵交換を記す．
     それは能動的な攻撃，受動的な攻撃，そしてオフラインの辞書攻撃に耐性がある．この文章はCrypto Forum Reserch Group (CFRG) によって保護されている．
 
-このメモの像((写し?))
-    この文章はインターネット標準の手段の仕様書ではない．それは情報提供を発行する．
+このメモの位置づけ
+    この文章はインターネット標準化手段の仕様書ではない．それは情報提供を目的として公開されている．
 
-    このドキュメントはInternet Reserch Task Force (IRTF) によって保護されている．IRTFは研究と開発活動のインターネットのつながりの結果を出版する．
+    このドキュメントはInternet Reserch Task Force (IRTF) によって保護されている．IRTFは研究と開発活動のインターネットのつながりの結果を出版する．このRFCはInternet Reserch Task Force (IRCF) の暗号フォーラムリサーチグループの1人以上の個々の意見を表す．IRSG((Internet Research Steering Group))に妥当だと認められた出版物はインターネット標準化のどのレベルにもふさわしいものではない．RFC5741のセクション2を見て．
+
+    この文章の今の位置づけ，正誤表，およびそれに対する意見についての情報は， http://www.rfc-editor.org/info/rfc7664 から得ることができるだろう．
+
+著作権表記
+    Copyright (c) 2015 IETF Trust and the persons identified as the document authors.  All rights reserved.
+
+    この文章は，この文章の発行日に実施する BCP 78 と IETF文書のIETF法的規定(http://trustee.ietf.org/license-info)の対象になる．注意してこれらの文章を見てください，なぜなら，この文章に関しての権利と制限を説明しているからです．
+
+目次
+    1.    はじめに
+        1.1.    言語についての用語法
+        1.2.    定義
+            1.2.1.   表記
+            1.2.2.   辞書攻撃からの抵抗
+    2.    離散対数暗号
+        2.1.    楕円曲線暗号
+        2.2.    有限領域暗号
+    3.    The Dragonfly Key Exchange
+        3.1.    前提((仮定))
+        3.2.    パスワード元の語源
+            3.2.1.   ECCグループと Hunting and Pecking
+            3.2.2.   MODPグループと Hunting and Pecking
+        3.3.    約束交換
+        3.4.    確認交換
+    4.    セキュリティの考慮すべき点
+    5.    リファレンス
+        5.1.    標準的((模範的))なリファレンス
+        5.2.    有益なリファレンス
+    謝辞((承認))
+    筆者の住所
+
+
+1. はじめに
+
+    パスワードと
