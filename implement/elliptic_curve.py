@@ -3,9 +3,6 @@ import math
 import secrets
 import hashlib
 
-password: bytes = 1234
-alice = 0xFFFFF
-bob = 0xDDDDDDD
 # & 1をとればlsbがとれる
 # TODO:逆元を求める関数をつくる
 
@@ -38,19 +35,20 @@ class ellipticCurve:
 
     # TODO: 平方余剰にする
     def yCalc(self, x):
-        return math.sqrt(x ** 3 + self.a * x + self.b)
+        return (math.sqrt(x ** 3 + self.a * x + self.b)) % self.p
 
 
 class ellipticCurvePoint:
 
     def __init__(self, x, y, curve):
-        self.x = int(x)
-        self.y = int(y)
+        self.x = x
+        self.y = y
         self.curve = curve
 
     def __str__(self):
-        return "(%d,%d)" % (self.x,self.y)
+        return "(%d,%d)" % (self.x, self.y)
 
+    '''
     def tobin(self, n):
         list = []
         while 1:
@@ -64,16 +62,17 @@ class ellipticCurvePoint:
             if n < 1:
                 break
         return list
+    '''
 
     def add(self, p2):
         p1 = self
-        p3 = ellipticCurvePoint(0, 0, curve)
+        p3 = ellipticCurvePoint(0, 0, self.curve)
         if p1.x == p2.x:
-            λ = (((3 * p1.y)**2 + self.curve.a) * modinv(2 * p2.y, p)) % p
+            λ = ((3 * (p1.x)**2 + self.curve.a) * modinv(2 * p1.y, self.curve.p)) % self.curve.p
         else:
-            λ = (((p2.y - p1.y) * modinv(p2.x - p1.x, p))) % p
-        p3.x = int(λ**2 - (p1.x + p2.x)) % p
-        p3.y = int((λ * (p1.x - p3.x) - p1.y) % p)
+            λ = (((p2.y - p1.y) * modinv(p2.x - p1.x, self.curve.p))) % self.curve.p
+        p3.x = (λ**2 - (p1.x + p2.x)) % self.curve.p
+        p3.y = (λ * (p1.x - p3.x) - p1.y) % self.curve.p
         return p3
 
     # TODO:Pを楕円曲線上の点にする
@@ -101,13 +100,13 @@ class ellipticCurvePoint:
 
 class Hash:
 
-    def __init__(self):
+    def __init__(self,alice,bob,password):
         self.a = alice
         self.b = bob
-        self.p = p
+        self.password = password
 
-    def makeHash(self, password, counter):
-        old = str(self.a + self.b + password + counter)
+    def makeHash(self,counter):
+        old = str(max(self.a,self.b) + min(self.a,self.b) + self.password + counter)
         H = hashlib.sha3_512(old.encode()).hexdigest()
         return H
 
@@ -117,14 +116,34 @@ class keyDerivationFunction:
     def __init__(self):
         a = 1
 
-    def dragonflyHuntingAndPecking(self):
-        a = 1
-
     def KDF(self, base):
         a = 1
 
+def test():
+    a = 1
+    b = 10
+    p = 29
+    curve = ellipticCurve(a, b, p)
+    #Y = ellipticCurve.yCalc(curve, n)
+    #d = ellipticCurvePoint(n, Y, curve)
+    #Y = ellipticCurve.yCalc(curve, l)
+    #e = ellipticCurvePoint(l, Y, curve)
+    d = ellipticCurvePoint(2, 7, curve)
+    e = ellipticCurvePoint(2, 7, curve)
+    #print(d.y % p)
+    #print(e.y % p)
+    #f = ellipticCurvePoint(0, 0, curve)
+    f = d.add(e)
+    print(f)
+    g = f.add(d)
+    print(g)
+    P = ellipticCurvePoint(2, 7, curve)
+    print(P.mul(2))
+
 
 if __name__ == "__main__":
+    test()
+    exit(1)
     a = 1
     b = 6
     p = 11
@@ -135,8 +154,8 @@ if __name__ == "__main__":
     #e = ellipticCurvePoint(l, Y, curve)
     d = ellipticCurvePoint(2, 7, curve)
     e = ellipticCurvePoint(2, 7, curve)
-    print(d.y % p)
-    print(e.y % p)
+    #print(d.y % p)
+    #print(e.y % p)
     #f = ellipticCurvePoint(0, 0, curve)
     f = d.add(e)
     print(f.x)
@@ -145,10 +164,10 @@ if __name__ == "__main__":
     print(g)
     P = ellipticCurvePoint(2, 7, curve)
     print(P.mul(4))
-    #R = ellipticCurvePoint.times(curve, 115, P)
-    # print(R)
-
-    counter = 2
-    M = Hash()
-    S = Hash.makeHash(M, password, counter)
-    # print(S)
+    alice = 0xFFFFF
+    bob = 0xDDDDDDD
+    password: bytes = 1234
+    counter = 1
+    M = Hash(alice,bob,password)
+    S  = M.makeHash(counter)
+    print(S)
