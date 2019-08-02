@@ -129,21 +129,32 @@ def test():
     #Y = ellipticCurve.yCalc(curve, l)
     #e = ellipticCurvePoint(l, Y, curve)
     d = ellipticCurvePoint(2, 7, curve)
+    assert d.x < p and d.x > 0
+    assert d.y < p and d.y > 0
     e = ellipticCurvePoint(2, 7, curve)
+    assert e.y < p and e.y > 0
+    assert e.x < p and e.x > 0
     #print(d.y % p)
     #print(e.y % p)
     #f = ellipticCurvePoint(0, 0, curve)
     f = d.add(e)
+    assert f.x < p and f.x > 0
+    assert f.y < p and f.y > 0
     print(f)
     g = f.add(d)
+    assert g.x < p and g.x > 0
+    assert g.y < p and g.y > 0
     print(g)
     P = ellipticCurvePoint(2, 7, curve)
-    print(P.mul(2))
+    P = P.mul(2)
+    assert P.x < p and P.x > 0
+    assert P.y < p and P.y > 0
+    print(P)
 
 
 if __name__ == "__main__":
     test()
-    exit(1)
+    exit(2)
     a = 1
     b = 6
     p = 11
