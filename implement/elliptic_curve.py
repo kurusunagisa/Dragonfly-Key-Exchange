@@ -11,7 +11,9 @@ p = 65537
 n = sc.randbelow(10000)
 l = sc.randbelow(10000)
 password :bytes = 1234
-k :bytes = 256
+k: bytes = 256
+alice = 0xFFFFF
+bob = 0xDDDDDDD
 class ellipticCurve:
     def __init__(self):
         self.a = a
@@ -78,8 +80,8 @@ class ellipticCurvePoint:
 class Hash:
 
     def __init__(self):
-        self.a = a
-        self.b = b
+        self.a = alice
+        self.b = bob
         self.p = p
 
     def makeHash(self,password,counter):
