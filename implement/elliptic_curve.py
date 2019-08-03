@@ -24,12 +24,7 @@ def modinv(a, m):
         return x % m
 
 
-def lgr(a, p):
-    return pow(a, (p - 1) // 2, p)
 
-
-def lsb(n):
-    return n & 1
 
 
 class ellipticCurve:
@@ -40,7 +35,7 @@ class ellipticCurve:
 
     def __eq__(self, o):
         s = self
-        if isinstance(s,ellipticCurve) and isinstance(o,ellipticCurve):
+        if isinstance(s, ellipticCurve) and isinstance(o, ellipticCurve):
             return s.a == o.a and s.b == o.b and s.p == o.p
         return False
 
@@ -61,10 +56,10 @@ class ellipticCurvePoint:
 
     def __eq__(self, b):
         a = self
-        #print(a.x,a.y,b.x,b.y)
-        if isinstance(a,ellipticCurvePoint) and isinstance(b,ellipticCurvePoint):
+        # print(a.x,a.y,b.x,b.y)
+        if isinstance(a, ellipticCurvePoint) and isinstance(b, ellipticCurvePoint):
             if a.curve == b.curve:
-                return  a.x == b.x and a.y == b.y
+                return a.x == b.x and a.y == b.y
         return False
 
     '''
@@ -120,59 +115,41 @@ class ellipticCurvePoint:
         return P
 
 
-class Hash:
-
-    def __init__(self, alice, bob, password):
-        self.a = alice
-        self.b = bob
-        self.password = password
-
-    def makeHash(self, counter):
-        old = str(max(self.a, self.b) + min(self.a,
-                                            self.b) + self.password + counter)
-        H = hashlib.sha3_512(old.encode()).hexdigest()
-        return H
-
-
-class keyDerivationFunction:
-
-    def __init__(self):
-        a = 1
-
-    def KDF(self, base):
-        a = 1
-
-
 def test():
     a = 1
     b = 10
     p = 29
     curve = ellipticCurve(a, b, p)
+    '''
     P = ellipticCurvePoint(10, 37747, curve)
-    R = ellipticCurvePoint(2, 7, curve)
-    print(P.add(P))
-    print(R)
-    assert P.add(P) == R
-    assert P.mul(2) == R
+    R = ellipticCurvePoint(7, 12, curve)
+    Q = ellipticCurvePoint(25, 21193, curve)
+    assert Q.add(P) == R
+    '''
+    P = ellipticCurvePoint(10, 37747, curve)
+    R = ellipticCurvePoint(13, 25, curve)
+    Q = P.add(P)
+    assert Q.add(P) == R
+    assert P.mul(3) == R
     # assert P.add(P) == P.mul(2)
 
 
-if __name__ == "__main__":
+def main():
     test()
     exit(2)
     a = 1
     b = 6
     p = 11
     curve = ellipticCurve(a, b, p)
-    #Y = ellipticCurve.yCalc(curve, n)
-    #d = ellipticCurvePoint(n, Y, curve)
-    #Y = ellipticCurve.yCalc(curve, l)
-    #e = ellipticCurvePoint(l, Y, curve)
+    # Y = ellipticCurve.yCalc(curve, n)
+    # d = ellipticCurvePoint(n, Y, curve)
+    # Y = ellipticCurve.yCalc(curve, l)
+    # e = ellipticCurvePoint(l, Y, curve)
     d = ellipticCurvePoint(2, 7, curve)
     e = ellipticCurvePoint(2, 7, curve)
-    #print(d.y % p)
-    #print(e.y % p)
-    #f = ellipticCurvePoint(0, 0, curve)
+    # print(d.y % p)
+    # print(e.y % p)
+    # f = ellipticCurvePoint(0, 0, curve)
     f = d.add(e)
     print(f.x)
     print(f.y)
@@ -180,10 +157,6 @@ if __name__ == "__main__":
     print(g)
     P = ellipticCurvePoint(2, 7, curve)
     print(P.mul(4))
-    alice = 0xFFFFF
-    bob = 0xDDDDDDD
-    password: bytes = 1234
-    counter = 1
-    M = Hash(alice, bob, password)
-    S = M.makeHash(counter)
-    print(S)
+
+if __name__ == "__main__":
+    main()
