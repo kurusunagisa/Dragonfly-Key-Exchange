@@ -1,5 +1,5 @@
-#import elliptic_curve
 from elliptic_curve import ellipticCurve,ellipticCurvePoint
+import sympy
 
 def main():
     a = 1
