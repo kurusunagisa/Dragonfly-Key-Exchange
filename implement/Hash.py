@@ -1,11 +1,5 @@
 import hashlib
 
-def lgr(a, p):
-    return pow(a, (p - 1) // 2, p)
-
-
-def lsb(n):
-    return n & 1
 
 class Hash:
     def __init__(self, alice, bob, password):
@@ -27,6 +21,7 @@ def main():
     M = Hash(alice, bob, password)
     S = M.makeHash(counter)
     print(S)
+    return S
 
 if __name__ == "__main__":
     main()

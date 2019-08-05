@@ -1,10 +1,6 @@
 import numpy as np
 import math
 import secrets
-import hashlib
-
-# & 1をとればlsbがとれる
-# TODO:逆元を求める関数をつくる
 
 
 def xgcd(a, b):
