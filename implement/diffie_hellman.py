@@ -7,6 +7,7 @@ def main():
     p = 29
     curve = ellipticCurve(a, b, p)
     G = ellipticCurvePoint(10, 37747, curve)
+
     da = 11
     Qa = G.mul(da)
     db = 9

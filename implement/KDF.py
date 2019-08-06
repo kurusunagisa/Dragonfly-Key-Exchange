@@ -1,18 +1,18 @@
 import hashlib
 
-def kdf(base,p):
+def dev(base,p):
     n = len(list(map(int,format(p,"b"))))+ 64
     string = base + "Dragonfly Hunting And Pecking"
-    H = int(hashlib.shake_256(string.encode()).hexdigest(n),16)
-    print(H)
-    return H
+    H = int(hashlib.shake_256(string.encode()).hexdigest(n), 16)
 
-def main(base,p):
-    H = kdf(base, p)
-    #S = int(H)
-    print(H)
-    #S :int = H.format(int)
-    #print(type(S))
+    S = format(H, 'x')
+    assert('0x' + S == hex(H))
+    assert (type(H) == int)
+    return S
+def main(base, p):
+    Ans  = dev(base, p)
+    return Ans
+
 if __name__ == "__main__":
     base = 'faaaaaa'
     p = 27
