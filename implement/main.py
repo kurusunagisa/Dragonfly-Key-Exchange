@@ -9,10 +9,10 @@ def main():
     a = 1
     b = 10
     p = 29
-    alice = 0xFFFFF
+    alice = 0xFFFFF2131
     bob = 0xDDDDDDD
-    password: bytes = 123456
-    k = 1000
+    password: bytes = 12345678
+    k = 100000
     found = 0
     counter = 1
     x = 0
@@ -52,4 +52,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    PE = main()
