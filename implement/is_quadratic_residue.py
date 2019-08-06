@@ -41,8 +41,8 @@ def is_quadratic_residue(val, p):
 
 
 def main():
-    p = 37747
-    val = 4142
+    p = 29
+    val = 21
     #N = lgr(val,p)
     N = is_quadratic_residue(val, p)
     print(N)
