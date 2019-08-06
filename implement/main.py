@@ -48,6 +48,7 @@ def main():
         PE = ellipticCurvePoint(x, p-y, curve)
     print(PE.x)
     print(PE.y)
+    return PE
 
 
 if __name__ == "__main__":
