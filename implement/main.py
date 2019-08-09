@@ -22,13 +22,13 @@ def main():
 
     while True:
         base = M.makeHash(counter)
-        assert(type(base) == str)
+        #assert(type(base) == str)
         temp = int(dev(base, p), 16)
-        assert(type(temp) == int)
+        #assert(type(temp) == int)
         seed = (temp % (p - 1)) + 1
-        assert (type(seed) == int)
+        #assert (type(seed) == int)
         base = int(base, 16)
-        if is_quadratic_residue(seed ^ 3 + a * seed + b, p):
+        if is_quadratic_residue((pow(seed,3,p) + a * seed + b) % p, p):
             #if found == 0:
             x = seed
             save = base
@@ -40,13 +40,15 @@ def main():
 
     curve = ellipticCurve(a, b, p)
     assert(curve.a == a and curve.b == b and curve.p == p)
-    y = int(curve.yCalc(x ^ 3 + a * x + b))
+    y = int(curve.yCalc(x))
     assert(type(save) == type(y))
     if lsb(y) == lsb(save):
         PE = ellipticCurvePoint(x, y, curve)
+        print("lsb(y) == lsb(save)",int(pow(x,3,p) + a * x + b) == y** 2)
     else:
-        PE = ellipticCurvePoint(x, p-y, curve)
-    print(PE.x)
+        PE = ellipticCurvePoint(x, p - y, curve)
+        print("lsb(y) != lsb(save)", int(pow(x,3,p) + a * x + b) == y**2)
+    #print(curve.yCalc(x) == y)
     print(PE.y)
     return PE
 
