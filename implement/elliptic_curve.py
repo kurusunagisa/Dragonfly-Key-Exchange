@@ -37,7 +37,7 @@ class ellipticCurve:
 
     # TODO: 平方余剰にする
     def yCalc(self, x):
-        return (math.sqrt(x ** 3 + self.a * x + self.b)) % self.p
+        return (math.sqrt(pow(x,3,self.p) + self.a * x + self.b)) % self.p
 
 
 class ellipticCurvePoint:
