@@ -1,9 +1,10 @@
 from secrets import choice
-from sympy.ntheory import sqrt_mod
+
+from sympy.ntheory import legendre_symbol
 
 
 def lgr(a, p):
-    return sqrt_mod(a, p)
+    return legendre_symbol(a, p)
 
 
 def lsb(n):
@@ -20,7 +21,7 @@ def findqr(p):
 def findqnr(p):
     while True:
         qnr = choice(range(1, p-1))
-        if lgr(qnr, p) == 1:
+        if lgr(qnr, p) == -1:
             return qnr
 
 
@@ -35,7 +36,7 @@ def is_quadratic_residue(val, p):
             return True
     else:
         num = (num * qnr) % p
-        if lgr(num, p) == 1:
+        if lgr(num, p) == -1:
             return True
     return False
 

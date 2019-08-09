@@ -8,8 +8,9 @@ class Hash:
         self.password = password
 
     def makeHash(self, counter):
+        print(type(counter))
         old = str(max(self.a, self.b) + min(self.a,
-                                            self.b) + self.password + counter)
+                                            self.b) + self.password + int(counter))
         H = hashlib.sha3_512(old.encode()).hexdigest()
         return H
 
