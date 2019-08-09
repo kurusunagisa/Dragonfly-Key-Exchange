@@ -117,7 +117,43 @@ if square_root_exists(x) and not P:
 
 # Cache Attacks
 
+```python
+for (counter = 1; counter < 40; counter++)
+    x = hash(pw, counter, addr1, addr2)
+    if x>= p: continue
+    if square_root_exists(x) and not P:
+        P = (x, sqrt(x^3 + ax + b))
+return P
+```
+
 ## NIST Elliptic Curves
 
+```python
+x = hash(pw, counter, addr1, addr2)
+```
+で，反復がどうなっているかを知るためにフラッシュ＆リロードをつかって監視する
+
+```python
+P = (x, sqrt(x^3 + ax + b))
+```
+で，コードが出力されたときに決めるためにフラッシュ＆リロードを使う
+
+## Brainpool Elliptic Curves
+
+```python
+x = hash(pw, counter, addr1, addr2)
+```
+で，反復がどうなっているかを知るためにフラッシュ＆リロードをつかって監視する
+
+```python
+    square_root_exists(x)
+```
+で，コードが出力されたときに決めるためにフラッシュ＆リロードを使う
+
+## 実験環境の中でのCache-attacks
+
+- 強力な攻撃者が必要
+- 被害者のマシンで特権のない(=ルート権限のない)コードを走らせる
+- 
 
 
