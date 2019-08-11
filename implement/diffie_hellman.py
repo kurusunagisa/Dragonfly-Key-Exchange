@@ -1,13 +1,9 @@
 from elliptic_curve import ellipticCurve,ellipticCurvePoint
 import sympy
+from ECC import ECC
 
 def main():
-    a = 1
-    b = 10
-    p = 29
-    curve = ellipticCurve(a, b, p)
-    G = ellipticCurvePoint(10, 37747, curve)
-
+    G = ECC()
     da = 11
     Qa = G.mul(da)
     db = 9
