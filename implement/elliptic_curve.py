@@ -110,6 +110,11 @@ class ellipticCurvePoint:
             P = P.add(Q)
         return P
 
+    def inverse(self):
+        self.x = - self.x
+        self.y = - self.y
+        return self
+
 
 def test():
     a = 1
