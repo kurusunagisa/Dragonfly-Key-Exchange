@@ -24,7 +24,7 @@ def findqnr(p):
         if lgr(qnr, p) == -1:
             return qnr
 
-
+#val 判断したいもの
 def is_quadratic_residue(val, p):
     qr = findqr(p)
     qnr = findqnr(p)

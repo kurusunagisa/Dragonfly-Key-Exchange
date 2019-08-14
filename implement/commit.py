@@ -4,31 +4,15 @@ from ECC import ECC
 from elliptic_curve import ellipticCurve, ellipticCurvePoint
 import hashlib
 
+#peer_scalar 相手のスカラー
+#peer_element 相手の要素
+#p
+def commit(peer_scalar, peer_element, private, PE, p):
 
-def commit():
-    PE = ECC()
-    q = 1863481
-    a = 1
-    b = 10
-    p = 29
-    sender_id :bytes= (0xFFFF).to_bytes(2, 'big')
-
-    private, mask = secrets.randbelow(q - 1) + 1, secrets.randbelow(q - 1) + 1
-    scalar = (private + mask) % q
-    temp = PE.mul(mask)
-    print(temp)
-    Element = temp.inverse()
-    print(private)
-    print(Element)
-    peer_scalar = 2
-    curve = ellipticCurve(a, b, p)
-    x = 5
-    y = curve.yCalc(x)
-    peer_element = ellipticCurvePoint(x, y, curve)
     ss = (PE.mul(peer_scalar).add(peer_element).mul(private)).x
     print(ss)
     p_len = len(list(map(int, format(p, "b"))))
-    n=p_len * 2
+    n = p_len * 2
     string = str(ss) + "Dragonfly Key Derivation"
     kck_mk = str(hashlib.shake_256(string.encode()).hexdigest(n))
     kck = kck_mk[0:p_len]
@@ -36,9 +20,9 @@ def commit():
     print(kck)
     print(mk)
 
-    return scalar, peer_scalar, Element, peer_element, kck
+    return kck, mk
 
-    #confirm = H(kck | scalar | peer-scalar | Element | Peer-Element | <sender-id>)
+    # confirm = H(kck | scalar | peer-scalar | Element | Peer-Element | <sender-id>)
 
     #ss = F(scalar-op(private,element-op(peer-Element,scalar-op(peer-scalar, PE))))
 
