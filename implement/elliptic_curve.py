@@ -123,7 +123,16 @@ class ellipticCurvePoint:
         return list
     '''
 
+    def isInfinity(self) :
+        return self.x == 0 and self.y == 0
+
     def add(self, p2):
+        if self.isInfinity():
+            return p2
+
+        if p2.isInfinity():
+            return self
+
         p1 = self
         p3 = ellipticCurvePoint(0, 0, self.curve)
         if p1.x == p2.x:
@@ -135,29 +144,24 @@ class ellipticCurvePoint:
         p3.y = (λ * (p1.x - p3.x) - p1.y) % self.curve.p
         return p3
 
-    # TODO:Pを楕円曲線上の点にする
-    """
-    def times(self, n, P):
-        Q = 0
-        # print(n)
-        n_bin = ellipticCurvePoint.tobin(curve, n)
-        # print(n_bin)
-        R = Q
-        T = P
-        for i in n_bin:
-            # print(i)
-            if i == 1:
-                T = T.add(R)
-            print(T)
-        return R
-    """
 
+    def mul(self, n):
+        R = ellipticCurvePoint(0,0,self.curve)
+        T = self
+        while n > 0:
+            if n & 1 == 1 :
+                R = R.add(T)
+            n //= 2
+            T = T.add(T)
+        return R
+    '''
     def mul(self, n):
         P = self
         Q = self
         for i in range(1, n):
             P = P.add(Q)
         return P
+    '''
 
     def inverse(self):
         newpoint = ellipticCurvePoint(
@@ -180,11 +184,13 @@ def test():
     # print(type(S))
     # print(S)
     # return
-    P = ellipticCurvePoint(10, 37747, curve)
+    P = ellipticCurvePoint(10, 37747 % p, curve)
     R = ellipticCurvePoint(13, 25, curve)
     Q = P.add(P)
     assert Q.add(P) == R
     assert P.mul(3) == R
+    assert P.times(3) == R
+    print(P.mul(1000000))
     # assert P.add(P) == P.mul(2)
 
 
