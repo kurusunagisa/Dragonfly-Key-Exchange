@@ -1,6 +1,8 @@
 import numpy as np
 import math
 import secrets
+from sympy.ntheory.residue_ntheory import sqrt_mod
+from is_quadratic_residue import is_quadratic_residue
 
 
 def xgcd(a, b):
@@ -20,14 +22,60 @@ def modinv(a, m):
         return x % m
 
 
+def TonelliShanks(a, p):
+    return sqrt_mod(a, p)
 
+
+'''
+def TonelliShanks(a, p):
+    S, Q = 1, 0
+    while True:
+        z = secrets.randbelow(p - 1) + 1
+        if not is_quadratic_residue(z, p):
+            break
+    print(z)
+
+    P = (p - 1) // 2
+    while P % 2 == 0:
+        S += 1
+        P //= 2
+    Q = P
+    print(Q, S)
+
+    M = S
+    c = pow(z, Q, p)
+    t = pow(a, Q, p)
+    R = pow(a, (Q + 1) // 2, p)
+
+    while True:
+        if t == 0:
+            return 0
+
+        if t == 1:
+            return R
+        #i = 1
+        t2=t
+        for i in range(1, M):
+            t2 = (t2 * t2) % p
+            print(t2)
+            if  t2 == 1:
+                break
+        print (i,M)
+
+        b = pow(c * c, M - i - 1, p)
+        M = i
+        c = pow(b, 2, p)
+        t = (t * c) % p
+        R = (R * b) % p
+'''
 
 
 class ellipticCurve:
-    def __init__(self, a, b, p):
+    def __init__(self, a, b, p, q = None):
         self.a = a
         self.b = b
         self.p = p
+        self.q = q
 
     def __eq__(self, o):
         s = self
@@ -37,7 +85,8 @@ class ellipticCurve:
 
     # TODO: 平方余剰にする
     def yCalc(self, x):
-        return (math.sqrt(pow(x,3,self.p) + self.a * x + self.b)) % self.p
+        fx = (pow(x, 3, self.p) + self.a * x + self.b) % self.p
+        return (sqrt_mod(fx, self.p))
 
 
 class ellipticCurvePoint:
@@ -111,9 +160,9 @@ class ellipticCurvePoint:
         return P
 
     def inverse(self):
-        self.x = - self.x
-        self.y = - self.y
-        return self
+        newpoint = ellipticCurvePoint(
+            self.x, self.curve.p - self.y, self.curve)
+        return newpoint
 
 
 def test():
@@ -127,6 +176,10 @@ def test():
     Q = ellipticCurvePoint(25, 21193, curve)
     assert Q.add(P) == R
     '''
+    #S = curve.yCalc(97)
+    # print(type(S))
+    # print(S)
+    # return
     P = ellipticCurvePoint(10, 37747, curve)
     R = ellipticCurvePoint(13, 25, curve)
     Q = P.add(P)
@@ -159,5 +212,6 @@ def main():
     P = ellipticCurvePoint(2, 7, curve)
     print(P.mul(4))
 
+
 if __name__ == "__main__":
-    main()
+    test()
