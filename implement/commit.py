@@ -1,6 +1,5 @@
 import secrets
 import numpy as np
-from ECC import ECC
 from elliptic_curve import ellipticCurve, ellipticCurvePoint
 import hashlib
 
@@ -28,7 +27,8 @@ def commit(peer_scalar, peer_element, private, PE, p):
 
 
 def main():
-    commit()
+    print(len("2531294081115351838688818799282891409517513240653165212510694309604509348519731245426893811242554901549455831447083505772980633097212593741993105765561347846"))
+    #commit()
 
 
 if __name__ == "__main__":
