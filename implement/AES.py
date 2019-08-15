@@ -27,14 +27,18 @@ class AESCipher(object):
 '''
 def encrypt(key,string):
     cipher = AES.new(key, AES.MODE_CBC)
-    string = ("abcd").encode()
-    string += b'\x00' * (16 - (len(string) % 16))
-    print(string)
-    ciphertext = cipher.encrypt(string)
+    b_string = (string).encode()
+    b_string += b'\x00' * (16 - (len(string) % 16))
+    print(b_string)
+    ciphertext = cipher.encrypt(b_string)
     print(ciphertext)
 
 
 def main():
+    key = get_random_bytes(16)
+    base = "abcdfdsagasgsagassgas"
+    encrypt(key, base)
+
 
 
 if __name__ == "__main__":
