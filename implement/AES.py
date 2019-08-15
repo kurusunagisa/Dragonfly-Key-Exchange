@@ -1,6 +1,7 @@
 
 from Crypto.Cipher import AES
 from Crypto.Random import get_random_bytes
+import secrets
 
 
 '''
@@ -25,20 +26,31 @@ class AESCipher(object):
     def _unpad(self, s):
         return s[:-ord(s[len(s)-1:])]
 '''
-def encrypt(key,string):
-    cipher = AES.new(key, AES.MODE_CBC)
-    b_string = (string).encode()
-    b_string += b'\x00' * (16 - (len(string) % 16))
-    print(b_string)
-    ciphertext = cipher.encrypt(b_string)
+
+
+def encrypt(key, data):
+    iv = AES.get_random_bytes(16)
+    cipher = AES.new(key, AES.MODE_CBC, iv=iv)
+    b_data = (data).encode()
+    b_data += b'\x00' * (16 - (len(b_data) % 16))
+    print(b_data)
+    ciphertext = cipher.encrypt(b_data)
     print(ciphertext)
+    return ciphertext, iv
+
+
+def decrypt(key, ciphertext, iv):
+    cipher = AES.new(key, AES.MODE_CBC ,iv = iv)
+    plaintext = cipher.decrypt(ciphertext)
+    print(plaintext)
+    return plaintext
 
 
 def main():
     key = get_random_bytes(16)
-    base = "abcdfdsagasgsagassgas"
-    encrypt(key, base)
-
+    data = "abcdfdsagasgsagassgas"
+    ciphertext, iv = encrypt(key, data)
+    plaintext = decrypt(key, ciphertext, iv)
 
 
 if __name__ == "__main__":

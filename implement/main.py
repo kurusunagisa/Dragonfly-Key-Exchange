@@ -9,6 +9,7 @@ import math
 from confirm import confirm
 from Crypto import Random
 from Crypto.Cipher import AES
+from AES import decrypt,encrypt
 
 
 def main():
@@ -94,5 +95,16 @@ def main():
     #Bob側
     message_dec = decode()
     '''
+    data = "abcsdfsa"
+    #alice側
+    ciphertext, iv = encrypt(alice_mk[0:32].encode(), data)
+    #bob側
+    plaintext = decrypt(bob_mk[0:32].encode(), ciphertext, iv)
+
+    data = "natorisana"
+    #bob側
+    ciphertext, iv = encrypt(bob_mk[0:32].encode(), data)
+    #alice側
+    plaintext = decrypt(alice_mk[0:32].encode(), ciphertext, iv)
 if __name__ == "__main__":
     main()
