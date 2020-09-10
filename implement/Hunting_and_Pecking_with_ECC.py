@@ -42,9 +42,9 @@ def hunting_and_pecking_with_ecc(curve,alice,bob,password):
     print("PE",PE)
     return PE
 
-    def main():
-        PE = ECC()
-        print(PE)
+def main():
+    PE = ECC()
+    print(PE)
 
 if __name__ == "__main__":
     main()

@@ -1,9 +1,11 @@
 # Dragonfly Exchangeとは
 
+## ECDHを応用した鍵共有アルゴリズム
+## WPA3に使われている
+
 # Elliptic-curve Diffie-Hellmanとは
 
 ## Diffie-Hellmanとは
-
 ## Elliptic-curveの利点
 
 # 全体の流れ
@@ -19,7 +21,6 @@
 # Commit-Exchange
 
 ## 各ピアのscalarとElementの導出
-
 ## 交換によるShared secretの導出
 
 # Confirm-Exchange
@@ -33,7 +34,7 @@
 
 # 実装の結果
 
+## 鍵共有が正しく行われているか
 ## NISTの楕円曲線パラメータによる実行速度
-## 
 
 # まとめ
