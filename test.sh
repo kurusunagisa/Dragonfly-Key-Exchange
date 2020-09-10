@@ -2,7 +2,7 @@
 
 git filter-branch --env-filter '
 
-OLD_EMAIL="aile114514@gmail.com"
+OLD_EMAIL="tsubasa_sakaguchi0127@gmail.com"
 CORRECT_NAME="soft-bear"
 CORRECT_EMAIL="17411@g.nagano-nct.ac.jp"
 
