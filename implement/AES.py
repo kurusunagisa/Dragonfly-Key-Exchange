@@ -33,16 +33,16 @@ def encrypt(key, data):
     cipher = AES.new(key, AES.MODE_CBC, iv=iv)
     b_data = (data).encode()
     b_data += b'\x00' * (16 - (len(b_data) % 16))
-    print(b_data)
+    print("plain_text = ",b_data)
     ciphertext = cipher.encrypt(b_data)
-    print(ciphertext)
+    print("cipher_text = ",ciphertext)
     return ciphertext, iv
 
 
 def decrypt(key, ciphertext, iv):
     cipher = AES.new(key, AES.MODE_CBC ,iv = iv)
     plaintext = cipher.decrypt(ciphertext)
-    print(plaintext)
+    print("decrypted_text = ",plaintext)
     return plaintext
 
 

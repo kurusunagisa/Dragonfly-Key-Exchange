@@ -5,7 +5,9 @@ import hashlib
 
 #peer_scalar 相手のスカラー
 #peer_element 相手の要素
-#p
+#private 自分の秘密鍵
+#PE 共有点
+#p macアドレス
 def commit(peer_scalar, peer_element, private, PE, p):
 
     ss = (PE.mul(peer_scalar).add(peer_element).mul(private)).x

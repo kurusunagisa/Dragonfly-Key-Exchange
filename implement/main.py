@@ -39,16 +39,16 @@ def main():
     temp1 = PE.mul(bob_scalar)
     temp2 = temp1.add(bob_element)
     temp3 = temp2.mul(alice_private)
-    print(temp1, temp2, temp3)
-    print("temp3.x =",temp3.x)
+    #print(temp1, temp2, temp3)
+    #print("temp3.x =",temp3.x)
     alice_ss = (temp3.x).to_bytes(math.ceil(math.log2(temp3.x) / 8),'big')
     #alice_ss = hex((PE.mul(bob_scalar).add(bob_element).mul(alice_private)).x)
     print("alice_ss =",alice_ss)
     temp1 = PE.mul(alice_scalar)
     temp2 = temp1.add(alice_element)
     temp3 = temp2.mul(bob_private)
-    print(temp1, temp2, temp3)
-    print("temp3.x =",temp3.x)
+    #print(temp1, temp2, temp3)
+    #print("temp3.x =",temp3.x)
     bob_ss = (temp3.x).to_bytes(math.ceil(math.log2(temp3.x) / 8),'big')
     print("bob_ss = ",bob_ss)
 
@@ -89,22 +89,23 @@ def main():
     ##bob側
     if alice_confirm == alice_confirm_expected:
         print("bob: confirm successed")
-    '''
-    #Alice側
-    message_enc = encode()
-    #Bob側
-    message_dec = decode()
-    '''
-    data = "abcsdfsa"
-    #alice側
-    ciphertext, iv = encrypt(alice_mk[0:32].encode(), data)
-    #bob側
-    plaintext = decrypt(bob_mk[0:32].encode(), ciphertext, iv)
 
-    data = "natorisana"
+    data = "@elliptic_shiho"
+    print("data =",data)
     #bob側
     ciphertext, iv = encrypt(bob_mk[0:32].encode(), data)
     #alice側
     plaintext = decrypt(alice_mk[0:32].encode(), ciphertext, iv)
+
+    print("enc_data =",plaintext.decode())
+
+    data = "㍾㍽㍼㍻㋿(⋈◍＞◡＜◍)。✧♡💗😻💑💕🌠🌟🔥"
+    print("data =",data)
+    #alice側
+    ciphertext, iv = encrypt(alice_mk[0:32].encode(), data)
+    #bob側
+    plaintext = decrypt(bob_mk[0:32].encode(), ciphertext, iv)
+    print("enc_data =",plaintext.decode())
+
 if __name__ == "__main__":
     main()
