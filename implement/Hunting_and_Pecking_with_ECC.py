@@ -28,10 +28,12 @@ def hunting_and_pecking_with_ecc(curve,alice,bob,password):
         counter %= 256
         if counter > k:
             break
-        assert(found == 0 and counter <= k)
+        if not (found == 0 and counter <= k):
+            raise AssertionError
     #assert(curve.a == a and curve.b == b and curve.p == p)
     y = curve.yCalc(x)
-    assert(type(save) == type(y))
+    if (type(save) != type(y)):
+        raise AssertionError
     if lsb(y) == lsb(save):
         PE = ellipticCurvePoint(x, y, curve)
         #print("lsb(y) == lsb(save)",int(pow(x,3,curve.p) + curve.a * x + curve.b) % curve.p == pow(y,2,curve.p) % curve.p)

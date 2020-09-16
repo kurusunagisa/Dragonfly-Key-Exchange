@@ -187,9 +187,12 @@ def test():
     P = ellipticCurvePoint(10, 37747 % p, curve)
     R = ellipticCurvePoint(13, 25, curve)
     Q = P.add(P)
-    assert Q.add(P) == R
-    assert P.mul(3) == R
-    assert P.times(3) == R
+    if Q.add(P) != R:
+        raise AssertionError
+    if P.mul(3) != R:
+        raise AssertionError
+    if P.times(3) != R:
+        raise AssertionError
     print(P.mul(1000000))
     # assert P.add(P) == P.mul(2)
 

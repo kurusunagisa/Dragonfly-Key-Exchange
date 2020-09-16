@@ -6,8 +6,10 @@ def dev(base,p):
     H = int(hashlib.shake_256(string.encode()).hexdigest(n), 16)
 
     S = format(H, 'x')
-    assert('0x' + S == hex(H))
-    assert (type(H) == int)
+    if ('0x' + S != hex(H)):
+        raise AssertionError
+    if (type(H) != int):
+        raise AssertionError
     return S
 def main(base, p):
     Ans  = dev(base, p)

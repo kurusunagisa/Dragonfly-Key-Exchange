@@ -67,7 +67,8 @@ def main():
     print("bob_kck =", bob_kck)
     print("bob_mk =", bob_mk)
 
-    assert(alice_kck==bob_kck)
+    if (alice_kck != bob_kck):
+        raise AssertionError
 
 
     #交換する前に自分のconfirmの値を求める
