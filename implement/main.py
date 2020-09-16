@@ -16,10 +16,13 @@ from Hunting_and_Pecking_with_ECC import hunting_and_pecking_with_ecc
 
 def main():
     curve = ellipticCurve(
-        q=0x01FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA51868783BF2F966B7FCC0148F709A5D03BB5C9B8899C47AEBB6FB71E91386409,
-        a=0x01FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC,
-        b=0x0051953EB9618E1C9A1F929A21A0B68540EEA2DA725B99B315F3B8B489918EF109E156193951EC7E937B1652C0BD3BB1BF073573DF883D2C34F1EF451FD46B503F00,
-        p=2 ** 521 - 1,
+        q=
+        0x01FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA51868783BF2F966B7FCC0148F709A5D03BB5C9B8899C47AEBB6FB71E91386409,
+        a=
+        0x01FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC,
+        b=
+        0x0051953EB9618E1C9A1F929A21A0B68540EEA2DA725B99B315F3B8B489918EF109E156193951EC7E937B1652C0BD3BB1BF073573DF883D2C34F1EF451FD46B503F00,
+        p=2**521 - 1,
     )
     """
     curve = ellipticCurve(a=0x340E7BE2A280EB74E2BE61BADA745D97E8F7C300,b=0x1E589A8595423412134FAA2DBDEC95C8D8675E58,p=0xE95E4A5F737059DC60DFC7AD95B3D8139515620F
@@ -57,13 +60,15 @@ def main():
     # commit
     # alice
     n = len(list(map(int, format(PE.curve.p, "b")))) * 2
-    temp = hashlib.shake_256(alice_ss + b"Dragonfly Key Derivation").hexdigest(512)
+    temp = hashlib.shake_256(alice_ss +
+                             b"Dragonfly Key Derivation").hexdigest(512)
     alice_kck = temp[0:256]
     alice_mk = temp[256:512]
     print("alice_kck =", alice_kck)
     print("alice_mk =", alice_mk)
     # bob
-    temp = hashlib.shake_256(bob_ss + b"Dragonfly Key Derivation").hexdigest(512)
+    temp = hashlib.shake_256(bob_ss +
+                             b"Dragonfly Key Derivation").hexdigest(512)
     bob_kck = temp[0:256]
     bob_mk = temp[256:512]
     print("bob_kck =", bob_kck)
@@ -74,22 +79,18 @@ def main():
 
     # 交換する前に自分のconfirmの値を求める
     # alice側
-    alice_confirm = confirm(
-        alice_scalar, bob_scalar, alice_element, bob_element, alice_kck, alice
-    )
+    alice_confirm = confirm(alice_scalar, bob_scalar, alice_element,
+                            bob_element, alice_kck, alice)
     # bob側
-    bob_confirm = confirm(
-        bob_scalar, alice_scalar, bob_element, alice_element, bob_kck, bob
-    )
+    bob_confirm = confirm(bob_scalar, alice_scalar, bob_element, alice_element,
+                          bob_kck, bob)
     # 交換して，相手のconfirmの値が正しいか検証する
     # alice側
-    bob_confirm_expected = confirm(
-        bob_scalar, alice_scalar, bob_element, alice_element, bob_kck, bob
-    )
+    bob_confirm_expected = confirm(bob_scalar, alice_scalar, bob_element,
+                                   alice_element, bob_kck, bob)
     # bob側
-    alice_confirm_expected = confirm(
-        alice_scalar, bob_scalar, alice_element, bob_element, alice_kck, alice
-    )
+    alice_confirm_expected = confirm(alice_scalar, bob_scalar, alice_element,
+                                     bob_element, alice_kck, alice)
 
     # それぞれで計算結果と送られてきた結果を比較
     # alice側

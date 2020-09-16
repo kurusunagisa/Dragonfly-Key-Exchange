@@ -23,8 +23,8 @@ def hunting_and_pecking_with_ecc(curve, alice, bob, password):
         # assert (type(seed) == int)
         base = int(base, 16)
         if is_quadratic_residue(
-            (pow(seed, 3, curve.p) + curve.a * seed + curve.b) % curve.p, curve.p
-        ):
+            (pow(seed, 3, curve.p) + curve.a * seed + curve.b) % curve.p,
+                curve.p):
             x = seed
             save = base
             break
