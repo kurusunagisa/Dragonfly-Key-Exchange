@@ -1,4 +1,4 @@
-from elliptic_curve import ellipticCurve, ellipticCurvePoint
+from elliptic_curve import ellipticCurvePoint
 from makeHash import Hash
 from is_quadratic_residue import is_quadratic_residue, lsb
 from KDF import dev

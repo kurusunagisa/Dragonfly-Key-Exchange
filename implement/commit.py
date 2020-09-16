@@ -1,6 +1,3 @@
-import secrets
-import numpy as np
-from elliptic_curve import ellipticCurve, ellipticCurvePoint
 import hashlib
 
 #peer_scalar 相手のスカラー

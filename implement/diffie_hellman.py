@@ -1,6 +1,4 @@
 from elliptic_curve import ellipticCurve,ellipticCurvePoint
-import sympy
-from Hunting_and_Pecking_with_ECC import hunting_and_pecking_with_ecc
 import binascii
 
 def main():
