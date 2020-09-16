@@ -103,7 +103,8 @@ class ellipticCurvePoint:
     def __eq__(self, b):
         a = self
         # print(a.x,a.y,b.x,b.y)
-        if isinstance(a, ellipticCurvePoint) and isinstance(b, ellipticCurvePoint):
+        if isinstance(a, ellipticCurvePoint) and isinstance(
+                b, ellipticCurvePoint):
             if a.curve == b.curve:
                 return a.x == b.x and a.y == b.y
         return False
@@ -137,12 +138,12 @@ class ellipticCurvePoint:
         p1 = self
         p3 = ellipticCurvePoint(0, 0, self.curve)
         if p1.x == p2.x:
-            λ = (
-                (3 * (p1.x) ** 2 + self.curve.a) * modinv(2 * p1.y, self.curve.p)
-            ) % self.curve.p
+            λ = ((3 * (p1.x)**2 + self.curve.a) *
+                 modinv(2 * p1.y, self.curve.p)) % self.curve.p
         else:
-            λ = (((p2.y - p1.y) * modinv(p2.x - p1.x, self.curve.p))) % self.curve.p
-        p3.x = (λ ** 2 - (p1.x + p2.x)) % self.curve.p
+            λ = (((p2.y - p1.y) *
+                  modinv(p2.x - p1.x, self.curve.p))) % self.curve.p
+        p3.x = (λ**2 - (p1.x + p2.x)) % self.curve.p
         p3.y = (λ * (p1.x - p3.x) - p1.y) % self.curve.p
         return p3
 
@@ -166,7 +167,8 @@ class ellipticCurvePoint:
     """
 
     def inverse(self):
-        newpoint = ellipticCurvePoint(self.x, self.curve.p - self.y, self.curve)
+        newpoint = ellipticCurvePoint(self.x, self.curve.p - self.y,
+                                      self.curve)
         return newpoint
 
 
