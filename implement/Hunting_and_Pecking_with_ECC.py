@@ -1,5 +1,7 @@
-from elliptic_curve import ellipticCurve, ellipticCurvePoint
-from is_quadratic_residue import is_quadratic_residue, lsb
+from elliptic_curve import ellipticCurve
+from elliptic_curve import ellipticCurvePoint
+from is_quadratic_residue import is_quadratic_residue
+from is_quadratic_residue import lsb
 from KDF import dev
 from makeHash import Hash
 
