@@ -1,14 +1,12 @@
 
 #from diffie_hellman import diffie_hellman
-from elliptic_curve import ellipticCurve, ellipticCurvePoint
+from elliptic_curve import ellipticCurve
 from Hunting_and_Pecking_with_ECC import hunting_and_pecking_with_ecc
 import binascii
 from handshake import createPrivateAndMask
 import hashlib
 import math
 from confirm import confirm
-from Crypto import Random
-from Crypto.Cipher import AES
 from AES import decrypt,encrypt
 
 

@@ -1,4 +1,3 @@
-from elliptic_curve import ellipticCurve, ellipticCurvePoint
 import secrets
 #PE.curve
 def createPrivateAndMask(PE):
