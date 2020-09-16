@@ -1,7 +1,7 @@
 from elliptic_curve import ellipticCurve, ellipticCurvePoint
-from makeHash import Hash
 from is_quadratic_residue import is_quadratic_residue, lsb
 from KDF import dev
+from makeHash import Hash
 
 
 def hunting_and_pecking_with_ecc(curve, alice, bob, password):
