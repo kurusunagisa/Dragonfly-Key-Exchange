@@ -18,8 +18,7 @@ def modinv(a, m):
     g, x, y = xgcd(a, m)
     if g != 1:
         raise Exception('modular inverse does not exist')
-    else:
-        return x % m
+    return x % m
 
 
 def TonelliShanks(a, p):
