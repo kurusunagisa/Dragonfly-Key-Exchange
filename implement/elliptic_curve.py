@@ -1,8 +1,9 @@
-import numpy as np
 import math
 import secrets
-from sympy.ntheory.residue_ntheory import sqrt_mod
+
+import numpy as np
 from is_quadratic_residue import is_quadratic_residue
+from sympy.ntheory.residue_ntheory import sqrt_mod
 
 
 def xgcd(a, b):
