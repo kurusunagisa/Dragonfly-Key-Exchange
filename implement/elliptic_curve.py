@@ -1,3 +1,4 @@
+import sys
 import numpy as np
 import math
 import secrets
@@ -196,7 +197,7 @@ def test():
 
 def main():
     test()
-    exit(2)
+    sys.exit(2)
     a = 1
     b = 6
     p = 11
