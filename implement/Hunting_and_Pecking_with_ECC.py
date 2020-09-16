@@ -4,7 +4,7 @@ from is_quadratic_residue import is_quadratic_residue, lsb
 from KDF import dev
 
 
-def hunting_and_pecking_with_ecc(curve,alice,bob,password):
+def hunting_and_pecking_with_ecc(curve, alice, bob, password):
     k = 40
     found = 0
     counter = 1
@@ -20,7 +20,7 @@ def hunting_and_pecking_with_ecc(curve,alice,bob,password):
         seed = (temp % (curve.p - 1)) + 1
         #assert (type(seed) == int)
         base = int(base, 16)
-        if is_quadratic_residue((pow(seed,3,curve.p) + curve.a * seed + curve.b) % curve.p, curve.p):
+        if is_quadratic_residue((pow(seed, 3, curve.p) + curve.a * seed + curve.b) % curve.p, curve.p):
             x = seed
             save = base
             break
@@ -41,12 +41,14 @@ def hunting_and_pecking_with_ecc(curve,alice,bob,password):
         PE = ellipticCurvePoint(x, curve.p - y, curve)
        #print("lsb(y) != lsb(save)", (pow(x,3,p) + (a * x) % p + b) % p == pow(y,2,p))
     #print(curve.yCalc(x) == y)
-    print("PE",PE)
+    print("PE", PE)
     return PE
+
 
 def main():
     PE = ECC()
     print(PE)
+
 
 if __name__ == "__main__":
     main()
