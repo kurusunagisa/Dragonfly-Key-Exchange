@@ -72,7 +72,7 @@ def TonelliShanks(a, p):
 
 
 class ellipticCurve:
-    def __init__(self, a, b, p, q = None):
+    def __init__(self, a, b, p, q=None):
         self.a = a
         self.b = b
         self.p = p
@@ -124,7 +124,7 @@ class ellipticCurvePoint:
         return list
     '''
 
-    def isInfinity(self) :
+    def isInfinity(self):
         return self.x == 0 and self.y == 0
 
     def add(self, p2):
@@ -145,12 +145,11 @@ class ellipticCurvePoint:
         p3.y = (λ * (p1.x - p3.x) - p1.y) % self.curve.p
         return p3
 
-
     def mul(self, n):
-        R = ellipticCurvePoint(0,0,self.curve)
+        R = ellipticCurvePoint(0, 0, self.curve)
         T = self
         while n > 0:
-            if n & 1 == 1 :
+            if n & 1 == 1:
                 R = R.add(T)
             n //= 2
             T = T.add(T)
