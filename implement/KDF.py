@@ -6,10 +6,10 @@ def dev(base, p):
     string = base + "Dragonfly Hunting And Pecking"
     H = int(hashlib.shake_256(string.encode()).hexdigest(n), 16)
 
-    S = format(H, 'x')
-    if ('0x' + S != hex(H)):
+    S = format(H, "x")
+    if "0x" + S != hex(H):
         raise AssertionError
-    if (type(H) != int):
+    if type(H) != int:
         raise AssertionError
     return S
 
@@ -20,6 +20,6 @@ def main(base, p):
 
 
 if __name__ == "__main__":
-    base = 'faaaaaa'
+    base = "faaaaaa"
     p = 27
     main(base, p)
