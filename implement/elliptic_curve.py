@@ -17,7 +17,7 @@ def xgcd(a, b):
 def modinv(a, m):
     g, x, y = xgcd(a, m)
     if g != 1:
-        raise Exception('modular inverse does not exist')
+        raise Exception("modular inverse does not exist")
     return x % m
 
 
@@ -25,7 +25,7 @@ def TonelliShanks(a, p):
     return sqrt_mod(a, p)
 
 
-'''
+"""
 def TonelliShanks(a, p):
     S, Q = 1, 0
     while True:
@@ -66,7 +66,7 @@ def TonelliShanks(a, p):
         c = pow(b, 2, p)
         t = (t * c) % p
         R = (R * b) % p
-'''
+"""
 
 
 class ellipticCurve:
@@ -85,11 +85,10 @@ class ellipticCurve:
     # TODO: 平方余剰にする
     def yCalc(self, x):
         fx = (pow(x, 3, self.p) + self.a * x + self.b) % self.p
-        return (sqrt_mod(fx, self.p))
+        return sqrt_mod(fx, self.p)
 
 
 class ellipticCurvePoint:
-
     def __init__(self, x, y, curve):
         self.x = x
         self.y = y
@@ -106,7 +105,7 @@ class ellipticCurvePoint:
                 return a.x == b.x and a.y == b.y
         return False
 
-    '''
+    """
     def tobin(self, n):
         list = []
         while 1:
@@ -120,7 +119,7 @@ class ellipticCurvePoint:
             if n < 1:
                 break
         return list
-    '''
+    """
 
     def isInfinity(self):
         return self.x == 0 and self.y == 0
@@ -135,11 +134,12 @@ class ellipticCurvePoint:
         p1 = self
         p3 = ellipticCurvePoint(0, 0, self.curve)
         if p1.x == p2.x:
-            λ = ((3 * (p1.x)**2 + self.curve.a) *
-                 modinv(2 * p1.y, self.curve.p)) % self.curve.p
+            λ = (
+                (3 * (p1.x) ** 2 + self.curve.a) * modinv(2 * p1.y, self.curve.p)
+            ) % self.curve.p
         else:
             λ = (((p2.y - p1.y) * modinv(p2.x - p1.x, self.curve.p))) % self.curve.p
-        p3.x = (λ**2 - (p1.x + p2.x)) % self.curve.p
+        p3.x = (λ ** 2 - (p1.x + p2.x)) % self.curve.p
         p3.y = (λ * (p1.x - p3.x) - p1.y) % self.curve.p
         return p3
 
@@ -152,18 +152,18 @@ class ellipticCurvePoint:
             n //= 2
             T = T.add(T)
         return R
-    '''
+
+    """
     def mul(self, n):
         P = self
         Q = self
         for i in range(1, n):
             P = P.add(Q)
         return P
-    '''
+    """
 
     def inverse(self):
-        newpoint = ellipticCurvePoint(
-            self.x, self.curve.p - self.y, self.curve)
+        newpoint = ellipticCurvePoint(self.x, self.curve.p - self.y, self.curve)
         return newpoint
 
 
@@ -172,13 +172,13 @@ def test():
     b = 10
     p = 29
     curve = ellipticCurve(a, b, p)
-    '''
+    """
     P = ellipticCurvePoint(10, 37747, curve)
     R = ellipticCurvePoint(7, 12, curve)
     Q = ellipticCurvePoint(25, 21193, curve)
     assert Q.add(P) == R
-    '''
-    #S = curve.yCalc(97)
+    """
+    # S = curve.yCalc(97)
     # print(type(S))
     # print(S)
     # return
